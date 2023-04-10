@@ -1,14 +1,14 @@
 class CustomerModel {
-  String email;
-  String firstName;
-  String lastName;
-  String password;
+  String? email;
+  String? firstName;
+  String? lastName;
+  String? password;
 
   CustomerModel({
-    required this.email,
-    required this.firstName,
-    required this.lastName,
-    required this.password,
+    this.email,
+    this.firstName,
+    this.lastName,
+    this.password,
   });
 
   Map<String, dynamic> toJson() {

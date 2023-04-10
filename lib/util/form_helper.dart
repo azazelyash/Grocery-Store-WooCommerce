@@ -1,16 +1,18 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class FormHelper {
   static Widget textInput(
     BuildContext context,
-    Object initialValue,
+    String? initialValue,
     Function onChanged, {
     bool isTextArea = false,
     bool isNumberInput = false,
     obscureText = false,
     required Function onValidate,
     required Widget prefixIcon,
-    required Widget suffixIcon,
+    Widget? suffixIcon,
   }) {
     return TextFormField(
       initialValue: initialValue != null ? initialValue.toString() : "",
@@ -18,13 +20,14 @@ class FormHelper {
         context,
         "",
         "",
-        suffixIcon: suffixIcon,
+        suffixIcon: suffixIcon ?? const SizedBox.shrink(),
         prefixIcon: prefixIcon,
       ),
       obscureText: obscureText,
       maxLines: !isTextArea ? 1 : 3,
       keyboardType: isNumberInput ? TextInputType.number : TextInputType.text,
       onChanged: (String value) {
+        log(value);
         onChanged(value);
       },
       validator: (value) {
@@ -74,13 +77,15 @@ class FormHelper {
     );
   }
 
-  static Widget saveButton(String buttonText, Function onTap,
-      {required String color,
-      required String textColor,
-      required bool fullWidth}) {
+  static Widget saveButton(
+    String buttonText,
+    Function onTap, {
+    required Color color,
+    required Color textColor,
+  }) {
     return SizedBox(
       height: 50.0,
-      width: 150,
+      width: 200.0,
       child: GestureDetector(
         onTap: () {
           onTap();

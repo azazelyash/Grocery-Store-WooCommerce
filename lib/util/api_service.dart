@@ -17,6 +17,11 @@ class APIService {
     try {
       var response = await Dio().post(
         Config.url + Config.customerURL,
+        queryParameters: {
+          'consumer_key': 'ck_c6104bbac4a739e08e6e56ecd72c60218ad8012c',
+          'consumer_secret': 'cs_7662eca8cf33f288a8e94f0c12ac9004c9d7f507',
+          'email': 'yash101@gmail.com'
+        },
         data: customer.toJson(),
         options: Options(
           headers: {
