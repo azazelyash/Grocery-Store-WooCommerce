@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -110,7 +112,7 @@ class _SignupPageState extends State<SignupPage> {
               FormHelper.textInput(
                 context,
                 customer.password,
-                (value) => {customer.password},
+                (value) => {customer.password = value},
                 onValidate: (value) {
                   if (value.toString().isEmpty) {
                     return "Password is required";
@@ -139,44 +141,42 @@ class _SignupPageState extends State<SignupPage> {
                   "Register",
                   () {
                     if (validateAndSave()) {
-                      print(customer.toJson());
+                      log(customer.toJson().toString());
                       setState(() {
                         isApiCallProcess = true;
                       });
 
-                      apiService.createCustomer(customer).then((ret) {
-                        setState(() {
-                          isApiCallProcess = false;
-                        });
-
-                        if (ret) {
-                          FormHelper.showMessage(
-                            context,
-                            "WooCommerce Api",
-                            "Registration Successfull",
-                            "Ok",
-                            () {
-                              Navigator.of(context).pop();
-                            },
-                          );
-                        } else {
-                          FormHelper.showMessage(
-                            context,
-                            "WooCommerce Api",
-                            "Email Already Exists",
-                            "Ok",
-                            () {
-                              Navigator.of(context).pop();
-                            },
-                          );
-                        }
-                      });
+                      apiService.createCustomerData(customer).then(
+                        (ret) {
+                          if (ret) {
+                            FormHelper.showMessage(
+                              context,
+                              "WooCommerce Api",
+                              "Registration Successfull",
+                              "Ok",
+                              () {
+                                Navigator.of(context).pop();
+                              },
+                            );
+                          } else {
+                            FormHelper.showMessage(
+                              context,
+                              "WooCommerce Api",
+                              "Email Already Exists",
+                              "Ok",
+                              () {
+                                Navigator.of(context).pop();
+                              },
+                            );
+                          }
+                        },
+                      );
                     }
                   },
                   color: Colors.redAccent,
                   textColor: Colors.white,
                 ),
-              )
+              ),
             ],
           ),
         ),

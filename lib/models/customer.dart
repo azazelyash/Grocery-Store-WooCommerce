@@ -11,17 +11,25 @@ class CustomerModel {
     this.password,
   });
 
-  Map<String, dynamic> toJson() {
-    Map<String, dynamic> map = {};
+  // Map<String, dynamic> toJson() {
+  //   Map<String, dynamic> map = {};
 
-    map.addAll({
-      "email": email,
-      "first_name": firstName,
-      "last_name": lastName,
-      "password": password,
-      "username": email,
-    });
+  //   map.addAll({
+  //     "email": email,
+  //     "first_name": firstName,
+  //     "last_name": lastName,
+  //     "password": password,
+  //     "username": email,
+  //   });
 
-    return map;
-  }
+  //   return map;
+  // }
+
+  Map<String, dynamic> toJson() => {
+        "email": email,
+        "first_name": firstName,
+        "last_name": lastName,
+        "password": password,
+        "username": email,
+      };
 }
