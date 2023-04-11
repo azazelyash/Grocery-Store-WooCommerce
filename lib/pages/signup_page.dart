@@ -140,43 +140,52 @@ class _SignupPageState extends State<SignupPage> {
                 child: FormHelper.saveButton(
                   "Register",
                   () {
-                    if (validateAndSave()) {
-                      log(customer.toJson().toString());
-                      setState(() {
-                        isApiCallProcess = true;
-                      });
+                    apiService.createCustomerData(customer);
+                    // if (validateAndSave()) {
+                    //   log(customer.toJson().toString());
+                    //   setState(() {
+                    //     isApiCallProcess = true;
+                    //   });
 
-                      apiService.createCustomerData(customer).then(
-                        (ret) {
-                          if (ret) {
-                            FormHelper.showMessage(
-                              context,
-                              "WooCommerce Api",
-                              "Registration Successfull",
-                              "Ok",
-                              () {
-                                Navigator.of(context).pop();
-                              },
-                            );
-                          } else {
-                            FormHelper.showMessage(
-                              context,
-                              "WooCommerce Api",
-                              "Email Already Exists",
-                              "Ok",
-                              () {
-                                Navigator.of(context).pop();
-                              },
-                            );
-                          }
-                        },
-                      );
-                    }
+                    //   apiService.createCustomer(customer).then(
+                    //     (ret) {
+                    //       if (ret) {
+                    //         FormHelper.showMessage(
+                    //           context,
+                    //           "WooCommerce Api",
+                    //           "Registration Successfull",
+                    //           "Ok",
+                    //           () {
+                    //             Navigator.of(context).pop();
+                    //           },
+                    //         );
+                    //       } else {
+                    //         FormHelper.showMessage(
+                    //           context,
+                    //           "WooCommerce Api",
+                    //           "Email Already Exists",
+                    //           "Ok",
+                    //           () {
+                    //             Navigator.of(context).pop();
+                    //           },
+                    //         );
+                    //       }
+                    //     },
+                    //   );
+                    // }
                   },
                   color: Colors.redAccent,
                   textColor: Colors.white,
                 ),
               ),
+              // Center(
+              //   child: FloatingActionButton(
+              //     onPressed: () {
+              //       apiService.createCustomer();
+              //     },
+              //     child: const Icon(Icons.add),
+              //   ),
+              // )
             ],
           ),
         ),
